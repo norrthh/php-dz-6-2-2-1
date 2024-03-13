@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('groups', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->string('start_from');
+            $table->boolean('is_active');
             $table->timestamps();
         });
     }

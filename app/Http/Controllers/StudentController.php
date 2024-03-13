@@ -21,8 +21,8 @@ class StudentController extends Controller
      */
     public function create($group)
     {
-        
-    return view('students.create', ['group' => $group]);
+
+        return view('students.create', ['group' => Group::query()->where('id', $group)->first()]);
     }
 
     /**
@@ -33,14 +33,12 @@ class StudentController extends Controller
         $request->validate([
             'surname' => 'required',
             'name' => 'required',
-
         ]);
 
         $student = new Student([
             'group_id' => $group->id,
             'surname' => $request->input('surname'),
             'name' => $request->input('name'),
-
         ]);
 
         $student->save();
@@ -54,10 +52,7 @@ class StudentController extends Controller
      */
     public function show(Group $group, Student $student)
     {
-
           $student = Student::findOrFail($student);
-
-
           return view('students.show', ['student' => $student, 'group' => $group]);
     }
 
